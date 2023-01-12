@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class test extends Controller
+class leetcode extends Controller
 {
     function hello(Request $request)
     {
-        return $request->all();
         return 'hello';
+        return $request->all();
     }
 
     function romanToInt($s = "MCMXCIV")
@@ -356,5 +356,20 @@ class test extends Controller
             }
         }
         return $ans;
+    }
+
+    function singleNumber($nums = [2, 2, 1])
+    {
+        $arr = $nums;
+        foreach ($nums as $key => $num) {
+            for ($i = $key + 1; $i < count($nums); $i++) {
+                if ($num == $nums[$i]) {
+                    array_splice($arr, $key);
+                    array_splice($arr, $i);
+                    break;
+                }
+            }
+        }
+        return $arr;
     }
 }

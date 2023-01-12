@@ -18,25 +18,36 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('hello', 'test@hello');
-Route::get('romanToInt', 'test@romanToInt');
-Route::get('firstUniqChar', 'test@firstUniqChar');
-Route::get('uniqueMorseRepresentations', 'test@uniqueMorseRepresentations');
-Route::get('minSetSize', 'test@minSetSize');
-Route::get('isPowerOfFour', 'test@isPowerOfFour');
-Route::get('canConstruct', 'test@canConstruct');
-Route::get('rotate', 'test@rotate');
-Route::get('largestPerimeter', 'test@largestPerimeter');
-Route::get('checkIfPangram', 'test@checkIfPangram');
-Route::get('countAndSay', 'test@countAndSay');
-Route::get('topKFrequent', 'test@topKFrequent');
-Route::get('diffArray', 'test@diffArray');
-Route::get('minMutation', 'test@minMutation');
-Route::get('reverseVowels', 'test@reverseVowels');
-Route::get('maximum69Number', 'test@maximum69Number');
-Route::get('makeGood', 'test@makeGood');
-Route::get('removeDuplicates', 'test@removeDuplicates');
-Route::get('guessNumber', 'test@guessNumber');
-Route::get('uniqueOccurrences', 'test@uniqueOccurrences');
-Route::get('minDeletionSize', 'test@minDeletionSize');
-Route::get('maxIceCream', 'test@maxIceCream');
+/**************************leetcode******************************/
+
+Route::get('hello', 'leetcode@hello');
+
+Route::prefix('leetcode')->group(function ($router) {
+    Route::get('singleNumber', 'leetcode@singleNumber');
+    Route::get('romanToInt', 'leetcode@romanToInt');
+    Route::get('firstUniqChar', 'leetcode@firstUniqChar');
+    Route::get('uniqueMorseRepresentations', 'leetcode@uniqueMorseRepresentations');
+    Route::get('minSetSize', 'leetcode@minSetSize');
+    Route::get('isPowerOfFour', 'leetcode@isPowerOfFour');
+    Route::get('canConstruct', 'leetcode@canConstruct');
+    Route::get('rotate', 'leetcode@rotate');
+    Route::get('largestPerimeter', 'leetcode@largestPerimeter');
+    Route::get('checkIfPangram', 'leetcode@checkIfPangram');
+    Route::get('countAndSay', 'leetcode@countAndSay');
+    Route::get('topKFrequent', 'leetcode@topKFrequent');
+    Route::get('diffArray', 'leetcode@diffArray');
+    Route::get('minMutation', 'leetcode@minMutation');
+    Route::get('reverseVowels', 'leetcode@reverseVowels');
+    Route::get('maximum69Number', 'leetcode@maximum69Number');
+    Route::get('makeGood', 'leetcode@makeGood');
+    Route::get('removeDuplicates', 'leetcode@removeDuplicates');
+    Route::get('guessNumber', 'leetcode@guessNumber');
+    Route::get('uniqueOccurrences', 'leetcode@uniqueOccurrences');
+    Route::get('minDeletionSize', 'leetcode@minDeletionSize');
+    Route::get('maxIceCream', 'leetcode@maxIceCream');
+});
+
+/**************************codility******************************/
+Route::prefix('codility')->group(function ($router) {
+    Route::get('MaxCounters', 'codility@MaxCounters');
+});
