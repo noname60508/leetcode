@@ -45,9 +45,20 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('uniqueOccurrences', 'leetcode@uniqueOccurrences');
     Route::get('minDeletionSize', 'leetcode@minDeletionSize');
     Route::get('maxIceCream', 'leetcode@maxIceCream');
+    Route::get('stringMatching', 'leetcode@stringMatching');
 });
 
 /**************************codility******************************/
 Route::prefix('codility')->group(function ($router) {
     Route::get('MaxCounters', 'codility@MaxCounters');
+});
+
+/**************************interview******************************/
+Route::prefix('interview')->group(function ($router) {
+    Route::get('test', 'interview@test');
+    // kkday
+    Route::get('kkday1', 'interview@kkday1');
+    Route::get('kkday2', 'interview@kkday2');
+    Route::get('kkday3', 'interview@kkday3');
+    Route::get('kkday4', 'interview@kkday4');
 });

@@ -372,4 +372,19 @@ class leetcode extends Controller
         }
         return $arr;
     }
+
+    function stringMatching($words = ["leetcoder", "leetcode", "od", "hamlet", "am"])
+    {
+        // dd(strpos('leetcoder', 'leetcode'));
+        $ans = [];
+        foreach ($words as $outValue) {
+            foreach ($words as $inValue) {
+                if (substr_count($inValue, $outValue) > 0 && ($outValue !== $inValue)) {
+                    $ans[] = $outValue;
+                    break;
+                }
+            }
+        }
+        return $ans;
+    }
 }
