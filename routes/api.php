@@ -46,6 +46,9 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('minDeletionSize', 'leetcode@minDeletionSize');
     Route::get('maxIceCream', 'leetcode@maxIceCream');
     Route::get('stringMatching', 'leetcode@stringMatching');
+    Route::get('addBinary', 'leetcode@addBinary');
+    Route::get('setForeach', 'leetcode@setForeach');
+    Route::get('findDuplicate', 'leetcode@findDuplicate');
 });
 
 /**************************codility******************************/

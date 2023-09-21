@@ -387,4 +387,67 @@ class leetcode extends Controller
         }
         return $ans;
     }
+
+    function addBinary($a, $b)
+    {
+        $newA = base_convert($a, 2, 10);
+        $newB = base_convert($b, 2, 10);
+        $ans = $newA + $newB;
+        return base_convert($ans, 10, 2);
+    }
+
+    function setForeach()
+    {
+        // 讀取 JSON 檔案內容
+        $jsonData = file_get_contents("C:/Users/10231/Downloads/契約工項詳細表object數據.json");
+
+        // 將 JSON 資料轉換為 PHP 陣列（或物件）
+        $data = collect(json_decode($jsonData, true)); // 第二個參數 true 表示要轉換為關聯陣列
+        $lastLevel = $data->pluck('levelNo')->max();
+        $data = $data->groupBy('levelNo');
+        // return $data;
+
+        $nowLevel = [];
+        while ($lastLevel > 0) {
+            $nextLevel = $nowLevel;
+            $nowLevel = [];
+            foreach ($data[$lastLevel] as $key => $value) {
+                $nextLevelKey = substr($value['printNo'], 0, -4);
+
+                if (empty($nextLevelKey)) {
+                    $nextLevelKey = 0;
+                }
+
+                $nowLevel[$nextLevelKey][] = [
+                    'printNo' => $value['printNo'],
+                    'itemNo' => $value['itemNo'],
+                    'levelNo' => $value['levelNo'],
+                    'cName' => $value['cName'],
+                    'unitName' => $value['unitName'],
+                    'A_QTY' => $value['A_QTY'],
+                    'R_QTY' => $value['R_QTY'],
+                    'QTY_Difference' => $value['QTY_Difference'],
+                    'cost' => $value['cost'],
+                    'A_AMOUNT' => $value['A_AMOUNT'],
+                    'R_AMOUNT' => $value['R_AMOUNT'],
+                    'kind' => $value['kind'],
+                    'pccesCode' => $value['pccesCode'],
+                    'memo' => $value['memo'],
+                    'nextLevel' => $nextLevel[$value['printNo']] ?? [],
+                ];
+            }
+
+            $lastLevel--;
+        }
+
+        return $nowLevel;
+    }
+
+    function findDuplicate($nums = [1, 3, 4, 2, 2])
+    {
+        $numCount = array_count_values($nums);
+        $maxNum = array_keys($numCount, max($numCount));
+
+        return $maxNum[0];
+    }
 }
