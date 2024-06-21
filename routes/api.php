@@ -49,6 +49,17 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('addBinary', 'leetcode@addBinary');
     Route::get('setForeach', 'leetcode@setForeach');
     Route::get('findDuplicate', 'leetcode@findDuplicate');
+    Route::get('leastInterval', 'leetcode@leastInterval');
+    Route::get('findDuplicates', 'leetcode@findDuplicates');
+    Route::get('findDuplicatesV2', 'leetcode@findDuplicatesV2');
+    Route::get('maxSubarrayLength', 'leetcode@maxSubarrayLength');
+    Route::get('minOperations', 'leetcode@minOperations');
+    Route::get('numSteps', 'leetcode@numSteps2');
+    Route::get('addedInteger', 'leetcode@addedInteger');
+    Route::get('minMovesToSeat', 'leetcode@minMovesToSeat');
+    Route::get('merge', 'leetcode@merge');
+    Route::get('maxSatisfied', 'leetcode@maxSatisfied');
+    Route::get('test', 'leetcode@test');
 });
 
 /**************************codility******************************/
@@ -64,4 +75,6 @@ Route::prefix('interview')->group(function ($router) {
     Route::get('kkday2', 'interview@kkday2');
     Route::get('kkday3', 'interview@kkday3');
     Route::get('kkday4', 'interview@kkday4');
+
+    Route::get('teamLab1', 'interview@teamLab1');
 });
