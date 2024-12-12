@@ -66,7 +66,32 @@ class leetcode extends Controller
     function uniqueMorseRepresentations($words = ["gin", "zen", "gig", "msg"])
     {
         $disc = [
-            'a' => ".-", 'b' => "-...", 'c' => "-.-.", 'd' => "-..", 'e' => ".", 'f' => "..-.", 'g' => "--.", 'h' => "....", 'i' => "..", 'j' => ".---", 'k' => "-.-", 'l' => ".-..", 'm' => "--", 'n' => "-.", 'o' => "---", 'p' => ".--.", 'q' => "--.-", 'r' => ".-.", 's' => "...", 't' => "-", 'u' => "..-", 'v' => "...-", 'w' => ".--", 'x' => "-..-", 'y' => "-.--", 'z' => "--.."
+            'a' => ".-",
+            'b' => "-...",
+            'c' => "-.-.",
+            'd' => "-..",
+            'e' => ".",
+            'f' => "..-.",
+            'g' => "--.",
+            'h' => "....",
+            'i' => "..",
+            'j' => ".---",
+            'k' => "-.-",
+            'l' => ".-..",
+            'm' => "--",
+            'n' => "-.",
+            'o' => "---",
+            'p' => ".--.",
+            'q' => "--.-",
+            'r' => ".-.",
+            's' => "...",
+            't' => "-",
+            'u' => "..-",
+            'v' => "...-",
+            'w' => ".--",
+            'x' => "-..-",
+            'y' => "-.--",
+            'z' => "--.."
         ];
         foreach ($words as $word) {
             $word = str_split($word);
@@ -519,9 +544,7 @@ class leetcode extends Controller
         return $ans;
     }
 
-    function numSteps($s = "1111110011101010110011100100101110010100101110111010111110110010")
-    {
-    }
+    function numSteps($s = "1111110011101010110011100100101110010100101110111010111110110010") {}
 
     function numSteps2($s = "1111110011101010110011100100101110010100101110111010111110110010")
     {
@@ -617,5 +640,159 @@ class leetcode extends Controller
         }
 
         return $grumpy0 + $maxCustomersSum;
+    }
+
+    function threeConsecutiveOdds($arr = [2, 6, 4, 1])
+    {
+        $check = 0;
+        foreach ($arr as $value) {
+            if ($value % 2 === 1) {
+                $check++;
+            } else {
+                $check = 0;
+            }
+
+            if ($check == 3)
+                return true;
+        }
+        return false;
+    }
+
+    function mergeAlternately($word1 = "abc", $word2 = "pqr")
+    {
+        // 0 2 4
+        // 1 3 5
+        $ans = [];
+        for ($i = 0; $i < strlen($word1); $i++) {
+            $ans[$i * 2] = $word1[$i];
+        }
+        for ($i = 0; $i < strlen($word2); $i++) {
+            $ans[($i * 2) + 1] = $word2[$i];
+        }
+        ksort($ans);
+
+        return implode("", $ans);
+    }
+
+    function intersect($nums1 = [1, 2, 2, 1], $nums2 = [2])
+    {
+        $ans = [];
+        if (count($nums1) === 0 || count($nums2) === 0)
+            return $ans;
+
+        foreach ($nums1 as $value) {
+            if (is_numeric($search = array_search($value, $nums2))) {
+                // return $search;
+                $ans[] = $value;
+                unset($nums2[$search]);
+            }
+            // $a[] = $search;
+        }
+
+        return $ans;
+    }
+
+    function gcdOfStrings($str1 = "ABCABC", $str2 = "ABC")
+    {
+        if ($str1 . $str2 !== $str2 . $str1)
+            return '';
+    }
+
+    function minDifference($nums = [20, 75, 81, 82, 95])
+    {
+        $minNums = $maxNums = $nums;
+        $min = min($minNums);
+        for ($i = 0; $i < 3; $i++) {
+            $minNums[array_search(max($minNums), $minNums)] = $min;
+        }
+        $minDiff = max($minNums) - min($minNums);
+
+        $max = max($maxNums);
+        for ($i = 0; $i < 3; $i++) {
+            $maxNums[array_search(min($maxNums), $maxNums)] = $max;
+        }
+        $maxDiff = max($maxNums) - min($maxNums);
+
+        return min($maxDiff, $minDiff);
+    }
+    function kthDistinct($arr = ["a", "b", "a"], $k = 3)
+    {
+        $num = 0;
+        $countArr = array_count_values($arr);
+        foreach ($arr as $value) {
+            if ($countArr[$value] == 1) {
+                $num++;
+                if ($num == $k)
+                    return $value;
+            }
+        }
+        return '';
+    }
+    function lemonadeChange($bills = [5, 5, 5, 10, 20])
+    {
+        $getMoney = [
+            20 => 0,
+            10 => 0,
+            5  => 0,
+        ];
+
+        foreach ($bills as $bill) {
+            if ($bill != 5) {
+                $giveChange = $bill - 5;
+                foreach ($getMoney as $banknote => $count) {
+                    $giveCount = (int) ($giveChange / $banknote);
+                    // 如果可以找的鈔票數量超過現在有的
+                    if ($giveCount > $count) {
+                        $giveChange = $giveChange - ($banknote * $count);
+                        $getMoney[$banknote] = 0;
+                    } else {
+                        $giveChange = $giveChange - ($banknote * $giveCount);
+                        $getMoney[$banknote] -= $giveCount;
+                    }
+                }
+
+                if ($giveChange > 0) return false;
+                $getMoney[$bill]++;
+            } else {
+                $getMoney[5]++;
+            }
+        }
+
+        return true;
+    }
+
+    function kidsWithCandies($candies = [2, 3, 5, 1, 3], $extraCandies = 3)
+    {
+        $max = max($candies);
+        foreach ($candies as $candie) {
+            $ans[] = $candie + $extraCandies < $max ? false : true;
+        }
+        return $ans;
+    }
+
+    function reverseWords($s = "  hello world  ")
+    {
+        $explode = explode(" ", $s);
+        // return array_diff(array_reverse($explode), ['']);
+
+        $ans = null;
+        foreach (array_diff(array_reverse($explode), ['']) as $value) {
+            if (is_null($ans)) {
+                $ans = $value;
+            } else {
+                $ans .= ' ' . $value;
+            }
+        }
+        return $ans;
+    }
+
+    function pickGifts(&$gifts = [25, 64, 9, 4, 100], $k = 4)
+    {
+        // $gifts = &$gifts;
+        for ($i = 0; $i < $k; $i++) {
+            $key = array_search(max($gifts), $gifts);
+            $gifts[$key] = (int) sqrt(max($gifts));
+        }
+        return array_sum($gifts);
     }
 }

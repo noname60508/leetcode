@@ -59,6 +59,16 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('minMovesToSeat', 'leetcode@minMovesToSeat');
     Route::get('merge', 'leetcode@merge');
     Route::get('maxSatisfied', 'leetcode@maxSatisfied');
+    Route::get('threeConsecutiveOdds', 'leetcode@threeConsecutiveOdds');
+    Route::get('mergeAlternately', 'leetcode@mergeAlternately');
+    Route::get('intersect', 'leetcode@intersect');
+    Route::get('gcdOfStrings', 'leetcode@gcdOfStrings');
+    Route::get('minDifference', 'leetcode@minDifference');
+    Route::get('kthDistinct', 'leetcode@kthDistinct');
+    Route::get('lemonadeChange', 'leetcode@lemonadeChange');
+    Route::get('kidsWithCandies', 'leetcode@kidsWithCandies');
+    Route::get('reverseWords', 'leetcode@reverseWords');
+    Route::get('pickGifts', 'leetcode@pickGifts');
     Route::get('test', 'leetcode@test');
 });
 
