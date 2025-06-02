@@ -69,6 +69,15 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('kidsWithCandies', 'leetcode@kidsWithCandies');
     Route::get('reverseWords', 'leetcode@reverseWords');
     Route::get('pickGifts', 'leetcode@pickGifts');
+    Route::get('longestMonotonicSubarray', 'leetcode@longestMonotonicSubarray');
+    Route::get('maxAscendingSum', 'leetcode@maxAscendingSum');
+    Route::get('tupleSameProduct', 'leetcode@tupleSameProduct');
+    Route::get('countLargestGroup', 'leetcode@countLargestGroup');
+    Route::get('countCompleteSubarrays', 'leetcode@countCompleteSubarrays');
+    Route::get('countSubarrays', 'leetcode@countSubarrays');
+    Route::get('countSubarrays2962', 'leetcode@countSubarrays2962');
+    Route::get('differenceOfSums', 'leetcode@differenceOfSums');
+    Route::get('findWordsContaining', 'leetcode@findWordsContaining');
     Route::get('test', 'leetcode@test');
 });
 

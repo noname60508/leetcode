@@ -795,4 +795,161 @@ class leetcode extends Controller
         }
         return array_sum($gifts);
     }
+
+    function longestMonotonicSubarray($nums = [1, 4, 3, 3, 2])
+    {
+        $ans = 0;
+        $maxKey = count($nums);
+        foreach ($nums as $key => $value) {
+            $increasing = 0;
+            $decreasing = 0;
+            for ($i = $key; $i < $maxKey; $i++) {
+                $increasing++;
+                if (!($nums[$i] < ($nums[$i + 1] ?? null)))
+                    break;
+            }
+            for ($i = $key; $i < $maxKey; $i++) {
+                $decreasing++;
+                if (!($nums[$i] > ($nums[$i + 1] ?? null)))
+                    break;
+            }
+
+            $ans = max($ans, $increasing, $decreasing);
+        }
+        return $ans;
+    }
+
+    function maxAscendingSum($nums = [10, 20, 30, 5, 10, 50])
+    {
+        $ans = 0;
+        $sum = 0;
+        foreach ($nums as $key => $value) {
+            if ($value > ($nums[$key - 1] ?? 0)) {
+                $sum += $value;
+                $ans = max($ans, $sum);
+            } else {
+                $sum = $value;
+            }
+        }
+
+        return $ans;
+    }
+
+    function tupleSameProduct($nums = [1, 2, 4, 5, 10, 20])
+    {
+        for ($a = 0; $a < count($nums); $a++) {
+            for ($b = $a + 1; $b < count($nums); $b++) {
+                $sum[$nums[$a] * $nums[$b]][] = [$nums[$a], $nums[$b]];
+            }
+        }
+
+        // foreach ($sum as $key => $value) {
+        // }
+        return $sum;
+    }
+
+    function countLargestGroup($n = 13)
+    {
+        $group = [];
+        for ($i = 1; $i <= $n; $i++) {
+            $key = array_sum(str_split($i));
+            $group[$key] = empty($group[$key]) ? 1 : $group[$key] + 1;
+        }
+
+        $array_count_values = array_count_values($group);
+        return $array_count_values[max($group)];
+    }
+
+    function countCompleteSubarrays($nums = [1934, 782, 126, 126, 1283, 789, 1730, 1966, 243, 126, 835, 314, 1134, 783, 864, 1595, 787, 1827, 840, 783, 243, 100, 600, 783, 1906, 1103, 783, 1906, 1554, 1557, 1619, 1572, 126, 999, 211, 1396, 130, 562, 1906, 668, 1554, 1344, 1689, 1938, 211, 1569, 1709, 315, 1934, 675, 181, 770, 1422, 1924, 76, 1326, 999, 1588, 227, 727, 436, 275, 783, 783, 1689, 1810, 738, 1015, 275, 612, 1093, 791, 1411, 1655, 1588, 126, 1053, 783, 980, 939, 1569, 999, 1788, 1371, 243, 335, 1906, 219, 85, 1788, 1966, 831, 930, 831, 1924, 1066, 426, 728, 1271, 543, 1403, 1469, 1641, 1921, 624, 126, 1268, 209, 1269, 1186, 1432, 1696, 1906, 566, 117, 1707, 138, 630, 1172, 1578, 399, 904, 1715, 29, 1904, 724, 1827, 1934, 1758, 98, 580, 6, 861, 6, 1235, 737, 1669, 1812, 630, 612, 637, 232, 518, 1579, 1027, 47, 1759, 1124, 848, 973, 839, 1846, 1672, 785, 1947, 316, 1345, 861, 1235, 1953, 1186, 1115, 23, 1792, 504, 1030, 230, 1698, 1689, 1572, 1494, 614, 986, 789, 1280, 528, 869, 1750, 282, 1827, 275, 895, 199, 841, 211, 592, 756, 770, 436, 1209, 538, 1689, 1620, 1550, 1906, 1506, 1630, 1494, 1289, 877, 1737, 1554, 1456, 1300, 1875, 916, 783, 436, 1473, 796, 623, 959, 519, 96, 210, 993, 181, 209, 23, 1359, 1539, 310, 399, 1906, 1651, 344, 488, 1456, 124, 740, 1253, 1014, 126, 10, 1253, 1160, 1401, 624, 1091, 710, 1344, 147, 1300, 932, 185, 1186, 203, 277, 720, 1182, 117, 879, 426, 264, 276, 1004, 710, 1738, 39, 1712, 225, 357, 1502, 330, 20, 487, 197, 1617, 1296, 329, 1353, 1839, 436, 1894, 227, 1689, 1437, 518, 1870, 924, 1101, 1053, 1854, 1554, 1540, 1955, 1182, 980, 1649, 1431, 739, 468, 1053, 1044, 400, 1885, 199])
+    {
+        $array_unique = array_values(array_unique($nums));
+        $array_unique_count = count($array_unique);
+        $ans = 0;
+
+        for ($i = 0; $i < count($nums); $i++) {
+            $arr = [];
+            $arr_count = 0;
+            for ($j = $i; $j < count($nums); $j++) {
+                if (!in_array($nums[$j], $arr)) {
+                    $arr[] = $nums[$j];
+                    $arr_count++;
+                }
+                // echo json_encode([$arr_count, $array_unique_count]) . PHP_EOL;
+
+                if ($arr_count == $array_unique_count) {
+                    $ans++;
+                }
+            }
+            // echo PHP_EOL;
+        }
+
+        return $ans;
+    }
+
+    function countSubarrays($nums = [1, 1, 1, 1], $minK = 1, $maxK = 1)
+    {
+        $ans = 0;
+
+        for ($i = 0; $i < count($nums); $i++) {
+            $arr = [];
+            for ($j = $i; $j < count($nums); $j++) {
+                if ($nums[$j] >= $minK && $nums[$j] <= $maxK) {
+                    $arr[] = $nums[$j];
+                    if (in_array($minK, $arr) && in_array($maxK, $arr)) {
+                        $ans++;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return $ans;
+    }
+
+    function countSubarrays2962($nums = [2, 2, 2, 2, 1, 3, 3, 2, 2, 1, 1, 3, 1, 1, 2, 3, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 3, 1, 3, 3], $k = 5)
+    {
+        $ans = 0;
+        $max = max($nums);
+
+        for ($i = 0; $i < count($nums); $i++) {
+            $count = 0;
+            for ($j = $i; $j < count($nums); $j++) {
+                if ($max == $nums[$j]) {
+                    $count++;
+                }
+                if ($count >= $k) {
+                    $ans++;
+                }
+            }
+        }
+
+        return $ans;
+    }
+
+    function differenceOfSums($n = 10, $m = 3)
+    {
+        $divisible = 0;
+        $notDivisible = 0;
+        for ($i = 1; $i <= $n; $i++) {
+            if ($i % $m == 0) {
+                $divisible += $i;
+            } else {
+                $notDivisible += $i;
+            }
+        }
+
+        return $notDivisible - $divisible;
+    }
+
+    function findWordsContaining($words = ["abc", "bcd", "aaaa", "cbc"], $x = "a")
+    {
+        $ans = [];
+        foreach ($words as $key => $word) {
+            if (strpos($word, $x) !== false) {
+                $ans[] = $key;
+            }
+        }
+        return $ans;
+    }
 }
