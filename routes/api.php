@@ -78,6 +78,7 @@ Route::prefix('leetcode')->group(function ($router) {
     Route::get('countSubarrays2962', 'leetcode@countSubarrays2962');
     Route::get('differenceOfSums', 'leetcode@differenceOfSums');
     Route::get('findWordsContaining', 'leetcode@findWordsContaining');
+    Route::get('smallestEquivalentString', 'leetcode@smallestEquivalentString');
     Route::get('test', 'leetcode@test');
 });
 

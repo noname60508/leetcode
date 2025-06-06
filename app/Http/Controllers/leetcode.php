@@ -952,4 +952,39 @@ class leetcode extends Controller
         }
         return $ans;
     }
+
+    function smallestEquivalentString($s1 = "cgokcgerolkgksgbhgmaaealacnsshofjinidiigbjerdnkolc", $s2 = "rjjlkbmnprkslilqmbnlasardrossiogrcboomrbcmgmglsrsj", $baseStr = "bxbwjlbdazfejdsaacsjgrlxqhiddwaeguxhqoupicyzfeupcn")
+    {
+        $arr = [];
+        $useAlphabet = [];
+        $ans = '';
+
+        for ($i = 0; $i < strlen($s1); $i++) {
+            if (array_key_exists($s1[$i], $useAlphabet) || array_key_exists($s2[$i], $useAlphabet)) {
+                foreach ($arr as $key => $value) {
+                    if (in_array($s1[$i], $value) || in_array($s2[$i], $value)) {
+                        $arr[$key][$s1[$i]] = $s1[$i];
+                        $arr[$key][$s2[$i]] = $s2[$i];
+                        $useAlphabet[$s1[$i]] = $key;
+                        $useAlphabet[$s2[$i]] = $key;
+                        break;
+                    }
+                }
+            } else {
+                $arr[] = [$s1[$i] => $s1[$i], $s2[$i] => $s2[$i]];
+                $useAlphabet[$s1[$i]] = count($arr) - 1;
+                $useAlphabet[$s2[$i]] = count($arr) - 1;
+            }
+        }
+        return ["arr" => $arr, "useAlphabet" => $useAlphabet];
+
+        for ($i = 0; $i < strlen($baseStr); $i++) {
+            if (array_key_exists($baseStr[$i], $useAlphabet)) {
+                $ans .= min($arr[$useAlphabet[$baseStr[$i]]]);
+            } else {
+                $ans .= $baseStr[$i];
+            }
+        }
+        return $ans;
+    }
 }
